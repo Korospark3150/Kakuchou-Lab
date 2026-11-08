@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>拡張ラボ | Microsoft Edge拡張機能をつくる学校のラボ</title>
+<meta name="description" content="拡張ラボは、2026年11月4日に設立された学校のラボです。Microsoft Edgeの拡張機能を、プログラマー・テスター・デザイナーの5人で開発しています。">
+<link id="favicon" rel="icon" type="image/svg+xml" href="logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="gauge" aria-hidden="true"><div class="gauge-fill" id="gaugeFill"></div></div>
+
+<header class="site-header">
+  <a class="brand" href="#top" aria-label="拡張ラボ トップへ">
+    <img class="js-logo" src="logo.svg" alt="" width="36" height="36">
+    <span>拡張ラボ</span>
+  </a>
+  <nav aria-label="メインメニュー">
+    <a href="#news">お知らせ</a>
+    <a href="#about">ラボについて</a>
+    <a href="#themes">研究テーマ</a>
+    <a href="#flow">開発の流れ</a>
+    <a href="#structure">しくみ</a>
+    <a href="#members">メンバー</a>
+    <a href="#projects">プロジェクト</a>
+    <a href="#history">沿革</a>
+    <a href="#notes">ラボノート</a>
+    <a href="#faq">よくある質問</a>
+    <a class="nav-cta" href="#join">参加する</a>
+  </nav>
+</header>
+
+<main id="top">
+
+<!-- ヒーロー -->
+<section class="hero">
+  <div class="hero-text">
+    <p class="hero-sub" data-bind="hero.sub"></p>
+    <h1 data-html="hero.title"></h1>
+    <p class="hero-lead" data-bind="hero.lead"></p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#projects">プロジェクトを見る</a>
+      <a class="btn btn-ghost" href="#members">メンバーを見る</a>
+    </div>
+    <dl class="hero-stats">
+      <div><dt>実験日数</dt><dd><span data-days>0</span><small>日目</small></dd></div>
+      <div><dt>研究員</dt><dd><span id="statMembers" data-count="0">0</span><small>人</small></dd></div>
+      <div><dt>役割</dt><dd><span id="statRoles" data-count="0">0</span><small>チーム</small></dd></div>
+      <div><dt>対象ブラウザ</dt><dd>Edge</dd></div>
+    </dl>
+  </div>
+
+  <div class="hero-visual" aria-hidden="true">
+    <svg viewBox="0 0 400 480" class="flask-svg">
+      <defs>
+        <clipPath id="flaskClip"><path d="M165 40h70v140l112 210a30 30 0 0 1-26 44H79a30 30 0 0 1-26-44l112-210z"/></clipPath>
+      </defs>
+      <!-- 液体 -->
+      <g clip-path="url(#flaskClip)">
+        <g class="liquid">
+          <path class="wave w1" d="M-200 290 q50 -26 100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 V500 H-200z"/>
+          <path class="wave w2" d="M-200 300 q50 22 100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 V500 H-200z"/>
+        </g>
+        <circle class="bub b1" cx="150" cy="420" r="7"/>
+        <circle class="bub b2" cx="220" cy="430" r="5"/>
+        <circle class="bub b3" cx="260" cy="410" r="9"/>
+        <circle class="bub b4" cx="190" cy="440" r="4"/>
+        <circle class="bub b5" cx="120" cy="435" r="5"/>
+      </g>
+      <!-- フラスコの輪郭 -->
+      <path class="flask-line" d="M165 40h70v140l112 210a30 30 0 0 1-26 44H79a30 30 0 0 1-26-44l112-210z"/>
+      <line x1="150" y1="40" x2="250" y2="40" class="flask-line"/>
+      <g class="ticks"><line x1="165" y1="90" x2="185" y2="90"/><line x1="165" y1="120" x2="178" y2="120"/><line x1="165" y1="150" x2="185" y2="150"/></g>
+      <!-- 落ちてくる拡張ピース -->
+      <g class="piece-drop"><g class="piece-spin">
+        <path fill="#00A99D" d="M-26 -22H-8A8 8 0 1 1 8 -22H26V-6A8 8 0 1 1 26 10V26H-26V10A8 8 0 1 0 -26 -6Z" transform="translate(200 120) scale(1.5)"/>
+      </g></g>
+    </svg>
+    <span class="tag t1">manifest_version: 3</span>
+    <span class="tag t2">Microsoft Edge</span>
+    <span class="tag t3">テスト中…</span>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true"><div class="marquee-track" id="marqueeTrack"></div></div>
+
+<!-- お知らせ -->
+<section class="sec" id="news">
+  <div class="sec-head">
+    <h2>お知らせ</h2>
+    <p>ラボからの最新情報です。</p>
+  </div>
+  <div class="news" id="newsList"></div>
+</section>
+
+<!-- ラボについて -->
+<section class="sec" id="about">
+  <div class="sec-head">
+    <h2>ラボについて</h2>
+    <p>拡張ラボは、学校の中につくった小さな開発チームです。会社ではなく、学びながらつくるための場所として、2026年11月4日に始まりました。</p>
+  </div>
+  <div class="about-grid" id="aboutGrid"></div>
+</section>
+
+<!-- 研究テーマ -->
+<section class="sec alt" id="themes">
+  <div class="sec-head">
+    <h2>研究テーマ</h2>
+    <p>ラボが取り組む4つの分野です。気になるテーマを押すと、詳しい内容が開きます。</p>
+  </div>
+  <div class="themes" id="themeList"></div>
+</section>
+
+<!-- 開発の流れ -->
+<section class="sec" id="flow">
+  <div class="sec-head">
+    <h2>開発の流れ</h2>
+    <p>ひとつの拡張機能は、次の6つの工程を順に通って完成します。工程ごとに担当チームが中心になって進めます。</p>
+  </div>
+  <ol class="flow" id="flowList"></ol>
+</section>
+
+<!-- しくみ -->
+<section class="sec alt" id="structure">
+  <div class="sec-head">
+    <h2>拡張機能のしくみ</h2>
+    <p>Edgeの拡張機能は、役割の違う小さな部品が集まってできています。中心の「manifest.json」が、どの部品をいつ動かすかを決めます。</p>
+  </div>
+  <svg class="diagram" viewBox="0 0 760 300" role="img" aria-label="拡張機能の部品の図">
+    <g class="links"><line x1="300" y1="135" x2="190" y2="55"/><line x1="300" y1="165" x2="190" y2="245"/><line x1="460" y1="135" x2="570" y2="55"/><line x1="460" y1="165" x2="570" y2="245"/></g>
+    <g class="node"><rect x="20" y="20" width="170" height="70" rx="10"/><text x="105" y="52" text-anchor="middle" class="t-b">popup.html</text><text x="105" y="72" text-anchor="middle">アイコンを押すと開く小窓</text></g>
+    <g class="node"><rect x="20" y="210" width="170" height="70" rx="10"/><text x="105" y="242" text-anchor="middle" class="t-b">options.html</text><text x="105" y="262" text-anchor="middle">くわしい設定の画面</text></g>
+    <g class="node center"><rect x="300" y="115" width="160" height="70" rx="10"/><text x="380" y="146" text-anchor="middle" class="t-b">manifest.json</text><text x="380" y="166" text-anchor="middle">全体の設計図</text></g>
+    <g class="node"><rect x="570" y="20" width="170" height="70" rx="10"/><text x="655" y="52" text-anchor="middle" class="t-b">service worker</text><text x="655" y="72" text-anchor="middle">裏で動く司令塔</text></g>
+    <g class="node"><rect x="570" y="210" width="170" height="70" rx="10"/><text x="655" y="242" text-anchor="middle" class="t-b">content script</text><text x="655" y="262" text-anchor="middle">Webページの中で動く</text></g>
+  </svg>
+  <div class="tech" id="techList"></div>
+</section>
+
+<!-- メンバー -->
+<section class="sec alt" id="members">
+  <div class="sec-head">
+    <h2>メンバー</h2>
+    <p>5人の研究員が、3つの役割に分かれて活動しています。</p>
+  </div>
+  <div class="filters" id="filters" role="group" aria-label="役割で絞り込み"></div>
+  <div class="members" id="memberList"></div>
+</section>
+
+<!-- プロジェクト -->
+<section class="sec" id="projects">
+  <div class="sec-head">
+    <h2>プロジェクト</h2>
+    <p>これから取り組む企画のサンプルです。決まり次第、実際のプロジェクトに差し替えていきます。</p>
+  </div>
+  <div class="projects" id="projectList"></div>
+</section>
+
+<!-- 沿革 -->
+<section class="sec alt" id="history">
+  <div class="sec-head">
+    <h2>沿革</h2>
+    <p>ラボの歩みを記録しています。</p>
+  </div>
+  <ol class="timeline" id="timelineList"></ol>
+</section>
+
+<!-- ラボノート -->
+<section class="sec dark" id="notes">
+  <div class="sec-head">
+    <h2>ラボノート</h2>
+    <p>Edge拡張機能の中心は「manifest.json」というファイルです。拡張機能の名前や、使う権限、動かすファイルをここに書きます。</p>
+  </div>
+  <div class="notes-grid">
+    <pre class="code" id="manifestCode" aria-label="manifest.jsonのサンプル"></pre>
+    <ul class="explain">
+      <li><b>manifest_version</b>拡張機能のルールの版です。</li>
+      <li><b>name / version</b>拡張機能の名前と、バージョン番号です。</li>
+      <li><b>permissions</b>使う権限です。必要最小限にするのがラボの約束です。</li>
+      <li><b>action</b>ツールバーのアイコンを押したときに開く画面です。</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 活動の流れ・FAQ -->
+<section class="sec alt" id="faq">
+  <div class="sec-head">
+    <h2>活動のようす・よくある質問</h2>
+    <p>1週間の活動イメージと、よく聞かれそうなことをまとめました。</p>
+  </div>
+  <div class="week" id="weekList"></div>
+  <div class="faq" id="faqList"></div>
+</section>
+
+<!-- 参加 -->
+<section class="sec" id="join">
+  <div class="sec-head">
+    <h2>参加・お問い合わせ</h2>
+    <p>拡張ラボに興味がある人、使ってみたい拡張機能のアイデアがある人は、メンバーに声をかけてください。</p>
+  </div>
+  <div class="join">
+    <div class="panel"><h3>こんな人を歓迎します</h3><ul id="joinList"></ul></div>
+  </div>
+  <div class="contact">
+    <div><b>お問い合わせ</b><a class="mail" data-mail data-mail-text href="#"></a></div>
+    <div class="contact-btns"><a class="btn btn-primary" data-mail data-subject href="#">メールを書く</a><button class="btn btn-ghost" id="copyMail" type="button">アドレスをコピー</button></div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="brand">
+    <img class="js-logo" src="logo.svg" alt="" width="40" height="40">
+    <span>拡張ラボ</span>
+  </div>
+  <p data-bind="lab.footer"></p>
+  <p class="small"><a data-mail data-mail-text href="#"></a></p>
+  <p class="small">&copy; 2026 拡張ラボ</p>
+</footer>
+
+<button class="to-top" id="toTop" type="button" aria-label="ページの先頭へ戻る">&uarr;</button>
+
+<script src="logo-data.js"></script>
+<script src="site-data.js"></script>
+<script src="render.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
