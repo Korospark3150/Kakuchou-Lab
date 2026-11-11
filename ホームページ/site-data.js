@@ -31,6 +31,9 @@ window.SITE = {
   /* ---- お知らせ(よく変えるところ) ---- */
   news: [
 
+{ date: '2026-11-11', tag: 'お知らせ', title: '拡張機能投稿', body: 'URL:https://microsoftedge.microsoft.com/addons/detail/voice-navi-%E9%9F%B3%E5%A3%B0%E3%81%A7%E3%83%96%E3%83%A9%E3%82%A6%E3%82%B6%E6%93%8D%E4%BD%9C/gbmnkemdloiiaealhkmjcncmioeamjbk' },
+
+
 { date: '2026-11-09', tag: 'お知らせ', title: 'メンバー追加', body: 'シシャモさんが、拡張ラボに追加されました！' },
 
     { date: '2026-11-08', tag: 'お知らせ', title: 'ホームページをつくり始めました', body: 'ラボの活動やメンバー、これからのプロジェクトをこのページで紹介していきます。' },
@@ -125,7 +128,7 @@ window.SITE = {
 
     { status: 'test', title: 'ヨミナビ', body: '漢字にフリガナをつけるツール。', team: ['プログラマー', 'デザイナー'] /*, progress: 10 */ },
 
-    { status: 'dev', title: 'ボイス ナビ', body: 'マウスとキーボードの代わりにしゃべって、ブラウザを動作させる。', team: ['プログラマー/テスター'] },
+    { status: 'done', title: 'ボイス ナビ', body: 'マウスとキーボードの代わりにしゃべって、ブラウザを動作させる。', team: ['プログラマー/テスター'] },
 
     { status: '不明', title: '新製品企画中', body: '新製品をチームで考えています。', team: ['不明'] }
   ],
