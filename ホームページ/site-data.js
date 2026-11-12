@@ -34,14 +34,14 @@ window.SITE = {
 { 
     date: '2026-11-13', 
     tag: 'お知らせ', 
-    title: '拡張機能投稿', 
+    title: 'ヨミナビ投稿', 
     body: 'リンク: https://microsoftedge.microsoft.com/addons/detail/%E3%83%A8%E3%83%9F%E3%83%8A%E3%83%93/khagepmjebjikkglkdifpjmiodniejpm' 
   },
 
   { 
     date: '2026-11-11', 
     tag: 'お知らせ', 
-    title: '拡張機能投稿', 
+    title: 'ボイスナビ投稿', 
     body: 'リンク: https://microsoftedge.microsoft.com/addons/detail/voice-navi-%E9%9F%B3%E5%A3%B0%E3%81%A7%E3%83%96%E3%83%A9%E3%82%A6%E3%82%B6%E6%93%8D%E4%BD%9C/gbmnkemdloiiaealhkmjcncmioeamjbk' 
   },
 
